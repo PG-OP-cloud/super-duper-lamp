@@ -9,7 +9,7 @@ if not secret_key_base64:
     print("❌ Error: SECRET_KEY is missing! Set it in GitHub Secrets.")
     exit(1)
 
-key = base64.b64decode(secret_key_base64)
+key = secret_key_base64
 
 # Initialize Cipher
 cipher = Fernet(key)
