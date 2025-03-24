@@ -2,15 +2,18 @@ import os
 import base64
 from cryptography.fernet import Fernet
 
-# Retrieve the secret key from GitHub Secrets (Environment Variable)
+# Retrieve and decode the secret key
 secret_key_base64 = os.getenv("SECRET_KEY")
 
 if not secret_key_base64:
     print("❌ Error: SECRET_KEY is missing! Set it in GitHub Secrets.")
     exit(1)
 
-# Decode the Base64 key
 key = base64.b64decode(secret_key_base64)
+
+# Save the decoded key to a file for decryption use
+with open("secret.key", "wb") as key_file:
+    key_file.write(key)
 
 # Initialize Cipher
 cipher = Fernet(key)
