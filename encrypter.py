@@ -11,9 +11,7 @@ if not secret_key_base64:
 
 key = base64.b64decode(secret_key_base64)
 
-# Save the decoded key to a file for decryption use
-with open("secret.key", "wb") as key_file:
-    key_file.write(key)
+
 
 # Initialize Cipher
 cipher = Fernet(key)
