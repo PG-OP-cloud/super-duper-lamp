@@ -25,4 +25,4 @@ jobs:
 
       - name: 🔓 Decrypt and Run Script
         run: |
-          python encrypt.py
+          python encrypter.py
