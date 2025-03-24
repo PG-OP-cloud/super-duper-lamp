@@ -1,0 +1,25 @@
+name: Run Encrypted Script
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛎️ Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🛠️ Install Dependencies
+        run: pip install -r requirements.txt
+
+      - name: 🔑 Set Up Secret Key
+        run: echo "${{ secrets.SECRET_KEY }}" > secret.key
+
+      - name: 🔓 Decrypt and Run Script
+        run: |
+          python encrypt.py
