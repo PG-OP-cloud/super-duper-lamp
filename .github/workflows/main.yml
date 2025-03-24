@@ -29,8 +29,9 @@ jobs:
             exit 1
           fi
 
-      - name: 🔓 Set Up Secret Key
-        run: echo "${{ secrets.SECRET_KEY }}" > secret.key
+      - name: 🔓 Decode and Save Secret Key
+        run: |
+          echo "${{ secrets.SECRET_KEY }}" | base64 --decode > secret.key
 
       - name: 🔓 Decrypt and Run Script
         run: python encrypter.py
