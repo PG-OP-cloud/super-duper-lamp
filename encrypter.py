@@ -2,7 +2,7 @@ import os
 import base64
 from cryptography.fernet import Fernet
 
-# Retrieve and decode the secret key
+# Retrieve and decode the secret key from environment variable
 secret_key_base64 = os.getenv("SECRET_KEY")
 
 if not secret_key_base64:
@@ -10,8 +10,6 @@ if not secret_key_base64:
     exit(1)
 
 key = base64.b64decode(secret_key_base64)
-
-
 
 # Initialize Cipher
 cipher = Fernet(key)
