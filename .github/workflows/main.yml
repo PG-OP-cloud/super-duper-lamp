@@ -13,16 +13,24 @@ jobs:
     steps:
       - name: 🛎️ Checkout Repository
         uses: actions/checkout@v4
-      - name: Set up Python  
+
+      - name: ⚙ Set up Python  
         uses: actions/setup-python@v4  
         with:  
           python-version: "3.10"  
-      - name: 🛠️ Install Dependencies
+
+      - name: 🛠 Install Dependencies
         run: pip install -r requirements.txt
 
-      - name: 🔑 Set Up Secret Key
+      - name: 🔑 Check for SECRET_KEY
+        run: |
+          if [[ -z "${{ secrets.SECRET_KEY }}" ]]; then
+            echo "❌ Error: SECRET_KEY is missing! Set it in GitHub Secrets."
+            exit 1
+          fi
+
+      - name: 🔓 Set Up Secret Key
         run: echo "${{ secrets.SECRET_KEY }}" > secret.key
 
       - name: 🔓 Decrypt and Run Script
-        run: |
-          python encrypter.py
+        run: python encrypter.py
